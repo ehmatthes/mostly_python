@@ -9,5 +9,5 @@ for _ in range(220_000):
     roll = randint(1,6)
     rolls.insert(0, roll)
 
-# Verify how many rolls we generated.
+# Verify how many rolls were generated.
 print(f"Generated {len(rolls):,} rolls.")

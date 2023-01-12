@@ -8,7 +8,7 @@ for _ in range(20_000_000):
     roll = randint(1,6)
     rolls.append(roll)
 
-# Verify how many rolls we generated.
+# Verify how many rolls were generated.
 print(f"Generated {len(rolls):,} rolls.")
 
 # Print the first ten rolls, and the last ten rolls.
