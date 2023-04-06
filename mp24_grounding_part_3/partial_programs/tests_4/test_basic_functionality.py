@@ -11,7 +11,7 @@ def test_default_border():
     # Note: currently, modified image ends up in same dir as source image.
     path_source = Path("tests/source_images/bear_scratching.jpg")
     path_modified = Path("tests/source_images/bear_scratching_bordered.jpg")
-    path_reference = Path("tests/reference_images/bear_scratching_default.jpg")
+    path_reference = Path("tests/reference_images/bear_scratching_bordered_default.jpg")
 
     cmd = f"python add_border.py {path_source}"
     cmd_parts = cmd.split()
@@ -25,56 +25,13 @@ def test_15px_border():
     # Note: currently, modified image ends up in same dir as source image.
     path_source = Path("tests/source_images/bear_scratching.jpg")
     path_modified = Path("tests/source_images/bear_scratching_bordered.jpg")
-    path_reference = Path("tests/reference_images/bear_scratching_15px_border.jpg")
+    path_reference = Path("tests/reference_images/bear_scratching_bordered_default_15px_border.jpg")
 
     cmd = f"python add_border.py {path_source} 15"
     cmd_parts = cmd.split()
 
     subprocess.run(cmd_parts)
     assert filecmp.cmp(path_modified, path_reference)
-
-def test_padding_only():
-    """Test that you can add padding to an image."""
-    # Note: currently, modified image ends up in same dir as source image.
-    path_source = Path("tests/source_images/bear_scratching.jpg")
-    path_modified = Path("tests/source_images/bear_scratching_bordered.jpg")
-    path_reference = Path("tests/reference_images/bear_scratching_15px_padding.jpg")
-
-    cmd = f"python add_border.py {path_source} --padding 15"
-    cmd_parts = cmd.split()
-
-    subprocess.run(cmd_parts)
-    assert filecmp.cmp(path_modified, path_reference)
-
-def test_custom_color_only():
-    """Test that you can set a custom border color."""
-    # Note: currently, modified image ends up in same dir as source image.
-    path_source = Path("tests/source_images/bear_scratching.jpg")
-    path_modified = Path("tests/source_images/bear_scratching_bordered.jpg")
-    path_reference = Path("tests/reference_images/bear_scratching_black_border.jpg")
-
-    cmd = f"python add_border.py {path_source} --border-color black"
-    cmd_parts = cmd.split()
-
-    subprocess.run(cmd_parts)
-    assert filecmp.cmp(path_modified, path_reference)
-
-def test_padding_and_border():
-    """Test that you can set custom padding and border width."""
-    # Note: This is just one test for combinining options; would add more of
-    #   these tests in a widely-used version of the project.
-
-    # Note: currently, modified image ends up in same dir as source image.
-    path_source = Path("tests/source_images/bear_scratching.jpg")
-    path_modified = Path("tests/source_images/bear_scratching_bordered.jpg")
-    path_reference = Path("tests/reference_images/bear_scratching_20px_border_15px_padding.jpg")
-
-    cmd = f"python add_border.py {path_source} 20 --padding 15"
-    cmd_parts = cmd.split()
-
-    subprocess.run(cmd_parts)
-    assert filecmp.cmp(path_modified, path_reference)
-
 
 # --- Tests for incorrect usage. ---
 
@@ -84,9 +41,9 @@ def test_no_arg():
     cmd_parts = cmd.split()
 
     output = subprocess.run(cmd_parts, capture_output=True)
-    error_msg = output.stderr.decode()
+    error_msg = output.stdout.decode()
 
-    assert "error: the following arguments are required: path" in error_msg
+    assert "You must provide a target image." in error_msg
 
 def test_nonexistent_file():
     """Test that calling with a nonexistent file generates a correct error msg."""
