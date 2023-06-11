@@ -5,5 +5,9 @@ __pycache__/
 
 .venv/
 
+.ipynb_checkpoints/
+
+git-sim_media/
+
 # Files associated with specific posts.
 mp23_grounding_part_2/willie_mountains_bordered.png
