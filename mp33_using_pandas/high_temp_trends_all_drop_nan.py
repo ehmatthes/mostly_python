@@ -39,7 +39,7 @@ for num_years in [1, 3, 5, 10, 30]:
     avgs = highs.rolling(timespan).mean()
 
     # Plot the data.
-    title = f"{int(timespan/365)}-year Moving Average Temperature"
+    title = f"{num_years}-year Moving Average Temperature"
 
     filename = f"output/high_temps_{num_years}_year_moving_average.png"
     plot_data(dates, avgs, title, filename=filename)
