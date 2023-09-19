@@ -1,0 +1,6 @@
+[<URLResolver <URLPattern list> (admin:admin) 'admin/'>]
+[<URLResolver <module 'pianos.urls' from '/Users/eric/projects/substack_work/substack_work_repo/code/mp57_urlspy_order/pianos/urls.py'> (pianos:pianos) ''>, <URLPattern '' [name='index']>]
+[<URLResolver <module 'pianos.urls' from '/Users/eric/projects/substack_work/substack_work_repo/code/mp57_urlspy_order/pianos/urls.py'> (pianos:pianos) ''>, <URLPattern 'about/' [name='about']>]
+[<URLResolver <module 'pianos.urls' from '/Users/eric/projects/substack_work/substack_work_repo/code/mp57_urlspy_order/pianos/urls.py'> (pianos:pianos) ''>, <URLPattern 'contact/' [name='contact']>]
+[<URLResolver <module 'pianos.urls' from '/Users/eric/projects/substack_work/substack_work_repo/code/mp57_urlspy_order/pianos/urls.py'> (pianos:pianos) ''>, <URLPattern 'faq/' [name='faq']>]
+[<URLResolver <module 'synths.urls' from '/Users/eric/projects/substack_work/substack_work_repo/code/mp57_urlspy_order/synths/urls.py'> (synths:synths) 'synths/'>, <URLPattern 'about/' [name='about']>]
