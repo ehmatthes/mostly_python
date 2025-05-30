@@ -2,30 +2,48 @@
 
 ## Setup
 
-- Download this mini-project by clicking [here](https://github.com/ehmatthes/mostly_python/releases/download/dice_battle_mp143/mp143_debugging_4.zip), or visit [this page](https://github.com/ehmatthes/mostly_python/releases/tag/dice_battle_mp143) and download the file *mp143_debugging_4.zip*.
-- Copy the folder 
-- `uv venv .venv`
-- `uv source .venv/bin/activate`
-- `uv pip install -r requirements.in`
-- Make an initial commit:
-    - `git init`
-    - `git add .`
-    - `git commit -m "Initial state."`
-
-## Running tests
+- Download this mini-project by clicking [here](https://github.com/ehmatthes/mostly_python/releases/download/dice_battle_mp143/dice_battle_mp143.zip), or visit [this page](https://github.com/ehmatthes/mostly_python/releases/tag/dice_battle_mp143) and download the file `dice\_battle\_mp143.zip`.
+- Copy the folder `dice_battle_mp143/` from your Downloads folder to wherever you like to store your Python programs.
+- Run the following commands to set up an environment for this project:
 
 ```sh
-$ pytest
-========== test session starts ==========
-collected 1 item
-tests/e2e_tests/test_basic_behavior.py .
-========== 1 passed in 0.03s ==========
+$ python -m venv .venv
+$ source .venv/bin/activate
+(.venv)$ pip install -r requirements.in
+(.venv)$ git init
+(.venv)$ git add .
+(.venv)$ git commit -m "Initial state."
 ```
 
 ## Running Dice Battle
 
 ```sh
-$ python dice_battle.py
+(.venv)$ python dice_battle.py
+Player A: 1
+Player B: 4
+Player B won!
+...
+
+Player A: 6
+Player B: 1
+Player A won!
+
+Summary:
+  Player A won 6 battles.
+  Player B won 3 battles.
+  There were 1 tied battles.
+
+Clearly, player A is better at rolling dice.
+```
+
+## Running tests
+
+```sh
+(.venv)$ pytest
+========== test session starts ==========
+collected 1 item
+tests/e2e_tests/test_basic_behavior.py .
+========== 1 passed in 0.03s ==========
 ```
 
 ## Practicing debugging
@@ -38,7 +56,7 @@ Added bug.
 All requested bugs inserted.
 ```
 
-Now when you run dice_battle.py, you should see a traceback:
+Now when you run `dice_battle.py`, you should see a traceback:
 
 ```sh
 $ python dice_battle.py 
