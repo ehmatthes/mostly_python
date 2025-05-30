@@ -70,3 +70,41 @@ Traceback (most recent call last):
                ^^^^^^^^^^^
 AttributeError: module 'os' has no attribute 'envidron'. Did you mean: 'environ'?
 ```
+
+You should also see a failure if you run the tests after running py-bugger:
+
+```sh
+(.venv) $ pytest
+============ test session starts =============
+...
+tests/e2e_tests/test_basic_behavior.py F     [100%]
+
+================== FAILURES ==================
+__________________ test_basic_behavior __________________
+
+>   ???
+E   AssertionError: assert '' == '\nPlayer A: ...lling dice.\n'
+E     
+E     - 
+E     - Player A: 5
+E     ...Full output truncated (42 lines hidden), use '-vv' to show
+
+tests/e2e_tests/test_basic_behavior.py:29: AssertionError
+__________________ Captured stdout call __________________
+Traceback (most recent call last):
+  File "/.../dice_battle.py", line 7, in <module>
+    import utils
+  File "/.../utils.py", line 3, in <module>
+    from die import Die
+  File "/.../die.py", line 7, in <module>
+    if seed := os.ienviron.get("DICE_BATTLE_RANDOM_SEED"):
+               ^^^^^^^^^^^
+AttributeError: module 'os' has no attribute 'ienviron'. Did you mean: 'environ'?
+
+========== short test summary info ===========
+FAILED tests/e2e_tests/test_basic_behavior.py::test_basic_behavior -
+    AssertionError: assert '' == '\nPlayer A: ...lling dice.\n'
+============= 1 failed in 0.04s ==========
+```
+
+Note the `AttributeError` just before the test summary, showing that the test failed because of the bug introduced by py-bugger.
