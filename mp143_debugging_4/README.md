@@ -2,7 +2,8 @@
 
 ## Setup
 
-- Download ...
+- Download this mini-project by clicking [here](https://github.com/ehmatthes/mostly_python/releases/download/dice_battle_mp143/mp143_debugging_4.zip), or visit [this page](https://github.com/ehmatthes/mostly_python/releases/tag/dice_battle_mp143) and download the file *mp143_debugging_4.zip*.
+- Copy the folder 
 - `uv venv .venv`
 - `uv source .venv/bin/activate`
 - `uv pip install -r requirements.in`
