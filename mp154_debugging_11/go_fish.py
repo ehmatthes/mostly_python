@@ -27,6 +27,7 @@ class GoFish:
 
     def player_turn(self):
         """Manage the human player's turn."""
+        go_fish_utils.clear_terminal()
         self.show_state()
         requested_card = go_fish_utils.get_player_guess(
             self.player_hand)

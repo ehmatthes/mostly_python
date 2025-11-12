@@ -1,5 +1,6 @@
 """Utility functions for the Go Fish game."""
 
+import subprocess
 import sys
 
 def get_player_guess(player_hand):
@@ -20,3 +21,10 @@ def get_player_guess(player_hand):
 
     # Valid response.
     return requested_card
+
+def clear_terminal():
+    """Clear the terminal."""
+    if sys.platform == "win32":
+        subprocess.run("cls")
+    else:
+        subprocess.run("clear")
