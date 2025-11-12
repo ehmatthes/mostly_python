@@ -28,6 +28,21 @@ class GoFish:
         """Manage the human player's turn."""
         self.show_state()
 
+        # Get player's guess (a rank).
+        msg = "\nWhat card would you like to ask for? "
+        requested_card = input(msg).upper()
+
+        if requested_card == "QUIT":
+            sys.exit("\nThanks for playing!")
+        if requested_card not in "2345678910JQKA":
+            print("Invalid entry, please try again.")
+            self.player_turn()
+            
+        player_ranks = [c.rank for c in self.player_hand.cards]
+        if requested_card not in player_ranks:
+            print("You don't have that card!")
+            self.player_turn()
+
     def show_state(self):
         """Show the current state of the game."""
         print("Player hand:")
