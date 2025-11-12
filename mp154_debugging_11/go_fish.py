@@ -1,6 +1,7 @@
 """Go Fish game, where one person plays against computer."""
 
 from card_models import Card, Hand, Deck
+import go_fish_utils
 
 
 class GoFish:
@@ -27,21 +28,8 @@ class GoFish:
     def player_turn(self):
         """Manage the human player's turn."""
         self.show_state()
-
-        # Get player's guess (a rank).
-        msg = "\nWhat card would you like to ask for? "
-        requested_card = input(msg).upper()
-
-        if requested_card == "QUIT":
-            sys.exit("\nThanks for playing!")
-        if requested_card not in "2345678910JQKA":
-            print("Invalid entry, please try again.")
-            self.player_turn()
-            
-        player_ranks = [c.rank for c in self.player_hand.cards]
-        if requested_card not in player_ranks:
-            print("You don't have that card!")
-            self.player_turn()
+        requested_card = go_fish_utils.get_player_guess(
+            self.player_hand)
 
     def show_state(self):
         """Show the current state of the game."""
