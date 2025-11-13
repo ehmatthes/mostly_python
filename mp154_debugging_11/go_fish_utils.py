@@ -31,6 +31,10 @@ def remove_card(target_rank, hand):
 
 def clear_terminal():
     """Clear the terminal."""
+    # Don't clear terminal in verbose mode.
+    if "-v" in sys.argv:
+        return
+        
     if sys.platform == "win32":
         subprocess.run("cls")
     else:

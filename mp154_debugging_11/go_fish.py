@@ -1,5 +1,7 @@
 """Go Fish game, where one person plays against computer."""
 
+import sys
+
 from card_models import Card, Hand, Deck
 import go_fish_utils
 
@@ -61,7 +63,10 @@ class GoFish:
         self.player_hand.show()
 
         print("\nComputer hand:")
-        self.computer_hand.show(hidden=True)
+        if "-v" in sys.argv:
+            self.computer_hand.show()
+        else:
+            self.computer_hand.show(hidden=True)
 
 if __name__ == "__main__":
     gf_game = GoFish()
