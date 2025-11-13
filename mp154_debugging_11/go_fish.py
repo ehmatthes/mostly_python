@@ -31,6 +31,29 @@ class GoFish:
         self.show_state()
         requested_card = go_fish_utils.get_player_guess(
             self.player_hand)
+        self.check_player_guess(requested_card)
+
+    def check_player_guess(self, guessed_rank):
+        """Process the player's guess."""
+        computer_ranks = [c.rank for c in self.computer_hand.cards]
+        if guessed_rank in computer_ranks:
+            # Correct guess. Remove card from both hands.
+            player_card = go_fish_utils.remove_card(
+                guessed_rank, self.player_hand)
+            computer_card = go_fish_utils.remove_card(
+                guessed_rank, self.computer_hand)
+
+            # Add cards to player's pairs.
+            self.player_pairs.append((player_card, computer_card))
+
+            # Player gets to go again.
+            msg = "\nYour guess was correct!"
+            msg += " Press Enter to continue."
+            input(msg)
+            self.player_turn()
+        else:
+            # It's the computer's turn now.
+            pass
 
     def show_state(self):
         """Show the current state of the game."""

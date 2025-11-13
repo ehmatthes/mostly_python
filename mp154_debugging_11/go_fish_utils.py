@@ -22,6 +22,13 @@ def get_player_guess(player_hand):
     # Valid response.
     return requested_card
 
+def remove_card(target_rank, hand):
+    """Remove the first card with a matching rank, and return it."""
+    for card in hand.cards:
+        if card.rank == target_rank:
+            hand.cards.remove(card)
+            return card
+
 def clear_terminal():
     """Clear the terminal."""
     if sys.platform == "win32":
