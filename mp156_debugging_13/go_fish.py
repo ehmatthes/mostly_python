@@ -15,6 +15,7 @@ class GoFish:
             random.seed(42)
         self.deck = Deck()
         self.deck.shuffle()
+        go_fish_utils.clear_terminal()
 
     def start_game(self):
         # Deal two hands.
@@ -70,7 +71,11 @@ class GoFish:
 
     def show_state(self):
         """Show the current state of the game."""
-        print("Player hand:")
+        msg = f"Player pairs:   {len(self.player_pairs)}"
+        msg += f"\nComputer pairs: {len(self.computer_pairs)}"
+        print(msg)
+
+        print("\nPlayer hand:")
         self.player_hand.show()
 
         print("\nComputer hand:")
