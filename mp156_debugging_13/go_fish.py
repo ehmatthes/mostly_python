@@ -1,6 +1,5 @@
 """Go Fish game, where one person plays against computer."""
 
-from collections import Counter
 import sys
 import random
 
@@ -29,7 +28,8 @@ class GoFish:
         self.computer_pairs = []
 
         # Check for any pairs either player already has.
-        self.check_pairs()
+        go_fish_utils.check_pairs(self.player_hand, self.player_pairs)
+        go_fish_utils.check_pairs(self.computer_hand, self.computer_pairs)
 
         # Player goes first.
         self.player_turn()
