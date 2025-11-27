@@ -61,3 +61,8 @@ def clear_terminal():
         subprocess.run("cls")
     else:
         subprocess.run("clear")
+
+def pause(message):
+    """Pause for player to see an update."""
+    message += " Press Enter to continue."
+    input(message)

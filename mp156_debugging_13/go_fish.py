@@ -75,19 +75,13 @@ class GoFish:
             self.player_pairs.append((player_card, computer_card))
 
             # Player gets to go again.
-            msg = "\nYour guess was correct!"
-            msg += " Press Enter to continue."
-            input(msg)
+            go_fish_utils.pause("\nYour guess was correct!")
             self.player_turn()
         else:
             # It's the computer's turn now.
-            msg = "\nYour guess was incorrect."
-            msg += " Press Enter to continue."
-            input(msg)
-
+            go_fish_utils.pause("\nYour guess was incorrect.")
             new_card = self.deck.draw()
-            msg = f"\nYou drew: {new_card}."
-            print(msg)
+            go_fish_utils.pause(f"\nYou drew: {new_card}.\n")
 
             self.player_hand.cards.append(new_card)
             self.player_hand.organize()
