@@ -81,7 +81,17 @@ class GoFish:
             self.player_turn()
         else:
             # It's the computer's turn now.
-            pass
+            msg = "\nYour guess was incorrect."
+            msg += " Press Enter to continue."
+            input(msg)
+
+            new_card = self.deck.draw()
+            msg = f"\nYou drew: {new_card}."
+            print(msg)
+
+            self.player_hand.cards.append(new_card)
+            self.player_hand.organize()
+            go_fish_utils.check_pairs(self.player_hand, self.player_pairs)
 
     def show_state(self):
         """Show the current state of the game."""
