@@ -10,15 +10,16 @@ import go_fish_utils
 class GoFish:
 
     def __init__(self):
-        # Start with a new shuffled deck.
+        # Set a random seed if requested.
         if "--seed" in sys.argv:
             random.seed(42)
+
+    def start_game(self):
+        # Shuffle, and deal two hands.
         self.deck = Deck()
         self.deck.shuffle()
         go_fish_utils.clear_terminal()
 
-    def start_game(self):
-        # Deal two hands.
         hands = self.deck.deal(num_hands=2, num_cards=7)
         self.player_hand, self.computer_hand = hands
         
@@ -39,6 +40,7 @@ class GoFish:
         """Manage the human player's turn."""
         go_fish_utils.clear_terminal()
         self.show_state()
+        self.check_finished()
         requested_card = go_fish_utils.get_player_guess(
             self.player_hand)
         self.check_player_guess(requested_card)
@@ -75,6 +77,7 @@ class GoFish:
         """Manage the computer's turn."""
         go_fish_utils.clear_terminal()
         self.show_state()
+        self.check_finished()
         requested_card = random.choice(self.computer_hand.cards).rank
         self.check_computer_guess(requested_card)
 
@@ -127,6 +130,29 @@ class GoFish:
             self.computer_hand.show()
         else:
             self.computer_hand.show(hidden=True)
+
+    def check_finished(self):
+        """Check if the game is over."""
+        # If both hands have at least one card, game is not over.
+        if self.player_hand.cards and self.computer_hand.cards:
+            return
+
+        # Announce the winner.
+        if not self.player_hand.cards and not self.computer_hand.cards:
+            msg = "\nTie game!\n\n"
+        if not self.player_hand.cards:
+            msg = "\nYou won!!!\n\n"
+        else:
+            msg = "\nThe computer won. :/\n\n"
+        go_fish_utils.pause(msg)
+
+        # Play again?
+        play_again = input("Do you want to play again? (y/n) ")
+        if play_again.lower() in ("y", "yes"):
+            self.start_game()
+        else:
+            print("Thanks for playing!")
+            sys.exit()
 
 if __name__ == "__main__":
     gf_game = GoFish()
