@@ -69,6 +69,50 @@ class GoFish:
             self.player_hand.organize()
             go_fish_utils.check_pairs(self.player_hand, self.player_pairs, "your")
 
+            self.computer_turn()
+    
+    def computer_turn(self):
+        """Manage the computer's turn."""
+        go_fish_utils.clear_terminal()
+        self.show_state()
+        requested_card = random.choice(self.computer_hand.cards).rank
+        self.check_computer_guess(requested_card)
+
+    def check_computer_guess(self, guessed_rank):
+        """Process the computer's guess."""
+        msg = f"\nThe computer asked for a {guessed_rank}."
+        print(msg)
+
+        player_ranks = [c.rank for c in self.player_hand.cards]
+        if guessed_rank in player_ranks:
+            # Correct guess. Remove card from both hands.
+            player_card = go_fish_utils.remove_card(
+                guessed_rank, self.player_hand)
+            computer_card = go_fish_utils.remove_card(
+                guessed_rank, self.computer_hand)
+
+            # Add cards to computer's pairs.
+            self.computer_pairs.append((player_card, computer_card))
+
+            # Computer gets to go again.
+            go_fish_utils.pause("\nThe computer's guess was correct!")
+            self.computer_turn()
+        else:
+            # It's the player's turn now.
+            go_fish_utils.pause("The computer's guess was incorrect.")
+            new_card = self.deck.draw()
+            if "-v" in sys.argv:
+                go_fish_utils.pause(f"Computer drew: {new_card}.\n")
+            else:
+                go_fish_utils.pause("The computer drew a card.")
+
+            self.computer_hand.cards.append(new_card)
+            self.computer_hand.organize()
+            go_fish_utils.check_pairs(
+                self.computer_hand, self.computer_pairs, "computer's")
+
+            self.player_turn()
+
     def show_state(self):
         """Show the current state of the game."""
         msg = f"Player pairs:   {len(self.player_pairs)}"
