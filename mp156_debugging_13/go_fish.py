@@ -11,7 +11,8 @@ class GoFish:
 
     def __init__(self):
         # Start with a new shuffled deck.
-        random.seed(42)
+        if "--seed" in sys.argv:
+            random.seed(42)
         self.deck = Deck()
         self.deck.shuffle()
 
