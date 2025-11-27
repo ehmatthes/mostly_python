@@ -28,30 +28,11 @@ class GoFish:
         self.computer_pairs = []
 
         # Check for any pairs either player already has.
-        go_fish_utils.check_pairs(self.player_hand, self.player_pairs)
-        go_fish_utils.check_pairs(self.computer_hand, self.computer_pairs)
+        go_fish_utils.check_pairs(self.player_hand, self.player_pairs, "your")
+        go_fish_utils.check_pairs(self.computer_hand, self.computer_pairs, "computer's")
 
         # Player goes first.
         self.player_turn()
-
-    def check_pairs(self):
-        """Check for pairs in either player's hand."""
-        # Player's hand.
-        ranks = [c.rank for c in self.player_hand.cards]
-        ranks_counts = Counter(ranks)
-        for rank, count in ranks_counts.items():
-            if count in (2, 3):
-                # Remove first two of this rank, and add to player_pairs.
-                card_1 = go_fish_utils.remove_card(rank, self.player_hand)
-                card_2 = go_fish_utils.remove_card(rank, self.player_hand)
-                pair = (card_1, card_2)
-                self.player_pairs.append(pair)
-            if count == 4:
-                # Player had all four cards of the same rank. Remove second pair.
-                card_1 = go_fish_utils.remove_card(rank, self.player_hand)
-                card_2 = go_fish_utils.remove_card(rank, self.player_hand)
-                pair = (card_1, card_2)
-                self.player_pairs.append(pair)
 
     def player_turn(self):
         """Manage the human player's turn."""
@@ -85,7 +66,7 @@ class GoFish:
 
             self.player_hand.cards.append(new_card)
             self.player_hand.organize()
-            go_fish_utils.check_pairs(self.player_hand, self.player_pairs)
+            go_fish_utils.check_pairs(self.player_hand, self.player_pairs, "your")
 
     def show_state(self):
         """Show the current state of the game."""

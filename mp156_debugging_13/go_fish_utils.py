@@ -37,7 +37,7 @@ def remove_pair(target_rank, hand):
         remove_card(target_rank, hand),
     )
 
-def check_pairs(hand, pairs):
+def check_pairs(hand, pairs, owner):
     """Check for pairs in a hand."""
     ranks = [c.rank for c in hand.cards]
     ranks_counts = Counter(ranks)
@@ -46,10 +46,12 @@ def check_pairs(hand, pairs):
             # Remove first two of this rank, and add to pairs.
             pair = remove_pair(rank, hand)
             pairs.append(pair)
+            pause(f"\nFound a pair in {owner} hand: {pair}\n")
         if count == 4:
             # There were four cards of the same rank. Remove second pair.
             pair = remove_pair(rank, hand)
             pairs.append(pair)
+            pause(f"\nFound a pair in {owner} hand: {pair}\n")
 
 def clear_terminal():
     """Clear the terminal."""
